@@ -1,0 +1,21 @@
+    clear all;
+    clc;
+    x_0 = 0.1;
+    y_0 = 0.8;
+    z_0 = 0.5;
+    maxItr = 20 ;
+    for k = 1 : maxItr
+        x_old  = x_0;
+        y_old = y_0;
+        z_old = z_0;
+    
+    x_0 = (4-z_old - 2*(y_old))/4;
+    y_0 = (4-z_old - 1*(x_0))/3;
+    z_0 = (7-3*(x_0) - 2*(y_0))/6;
+
+    fprintf('Iteration  %2d\n x = %0.6f y = %0.6f z= %0.6f\n', k, x_0, y_0, z_0);
+    
+    if abs(x_0 - x_old) <1e-9 && abs(z_0 - z_old) <1e-9 && abs(y_0 - y_old) <1e-9;
+       break; 
+    end;
+    end;
