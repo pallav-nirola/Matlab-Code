@@ -1,0 +1,28 @@
+clc;
+clear all;
+
+% 3x3 system with decimals
+A = [1.2  3.5 -0.5  4.1;
+     2.3 -1.1  4.7  3.9;
+    -0.8  2.4  1.6  2.3];
+
+n = 3;
+
+% --------- Forward Elimination (General Formula) ----------
+for i = 1:n-1
+    for j = i+1:n
+        factor = A(j,i) / A(i,i);
+        A(j,:) = A(j,:) - factor * A(i,:);
+    end
+end
+
+% --------- Back Substitution ----------
+x = zeros(n,1);
+x(n) = A(n,4) / A(n,3);
+
+for i = n-1:-1:1
+    x(i) = (A(i,4) - A(i, i+1:n) * x(i+1:n)) / A(i,i);
+end
+
+fprintf("Solution:\n");
+fprintf("x = %.5f\ny = %.5f\nz = %.5f\n", x(1), x(2), x(3));
