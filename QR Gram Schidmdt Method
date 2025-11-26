@@ -1,0 +1,26 @@
+clc; clear all;
+
+A = [1 2 0;
+     0 1 1;
+     1 0 1];
+
+[m,n] = size(A);
+Q = zeros(m,n);
+R = zeros(n,n);
+
+for j = 1:n
+    u = A(:,j);
+
+    for i = 1:j-1
+        R(i,j) = dot(Q(:,i), A(:,j));
+        u = u - R(i,j) * Q(:,i);
+    end
+
+    R(j,j) = norm(u);
+    Q(:,j) = u / R(j,j);
+end
+
+disp('Matrix Q (Orthonormal):');
+Q
+disp('Matrix R (Upper Triangular):');
+R
