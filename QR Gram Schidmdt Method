@@ -8,16 +8,16 @@ A = [1 2 0;
 Q = zeros(m,n);
 R = zeros(n,n);
 
-for j = 1:n
-    u = A(:,j);
+for i = 1:n
+    u = A(:,i);
 
-    for i = 1:j-1
-        R(i,j) = dot(Q(:,i), A(:,j));
-        u = u - R(i,j) * Q(:,i);
+    for j = 1:i-1
+        R(j,i) = dot(Q(:,j), A(:,i));
+        u = u - R(j,i) * Q(:,j);
     end
 
-    R(j,j) = norm(u);
-    Q(:,j) = u / R(j,j);
+    R(i,i) = norm(u);
+    Q(:,i) = u / R(i,i);
 end
 
 disp('Matrix Q (Orthonormal):');
