@@ -1,32 +1,34 @@
 clc;
 clear;
 
-% ----- Step 1: Define any square matrix -----
-A = [1 2; 3 4];   % Replace with any n x n matrix
+% ----- Step 1: Define matrix manually -----
+A = [1 2; 
+     3 4];      % <-- Change this to any n×n matrix
 
-% ----- Step 2: Initial guess vector -----
-n = size(A,1);    % Get number of rows
-x = ones(n,1);    % Initial guess (all ones)
+% ----- Step 2: Define initial guess manually -----
+x = [1; 0];     % <-- Change this to any n×1 vector
 
 % ----- Step 3: Parameters -----
-max_iter = 100;   % Maximum iterations
-tol = 1e-6;       % Convergence tolerance
+max_iter = 100;
+tol = 1e-6;
 
-% ----- Step 4: Power Method Iteration using max-element scaling -----
+% ----- Step 4: Power Method (Max Element Scaling) -----
 for k = 1:max_iter
-    y = A * x;                 % Multiply by matrix
-    lambda = max(abs(y));      % Estimate eigenvalue as max element
-    x_new = y / lambda;        % Scale vector by max element
+    y = A * x;                 % Multiply
+    lambda = max(abs(y));      % Eigenvalue estimate
+    x_new = y / lambda;        % Normalize
     
-    % Check convergence
+    % Stop if converged
     if norm(x_new - x) < tol
         break;
     end
+    
     x = x_new;
 end
 
-% ----- Step 5: Display results -----
-disp('Largest eigenvalue:');
+% ----- Step 5: Display Results -----
+disp('Largest Eigenvalue (approx):');
 disp(lambda);
-disp('Corresponding eigenvector (scaled by largest element):');
-disp(x);
+
+disp('Corresponding Eigenvector:');
+disp(x_new);
